@@ -3,15 +3,15 @@ apply from: 'libraries.gradle'
 allprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
-    apply plugin: 'maven'
 
     group = 'org.jpos.ee'
     version = jPOS_EE_version
 }
 
 subprojects {
+    apply plugin: 'maven'
     apply plugin: 'java'
-    apply plugin: 'signing'
+    //apply plugin: 'signing'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
     [ compileJava, compileTestJava, javadoc ]*.options*.encoding = 'UTF-8'
@@ -59,10 +59,10 @@ subprojects {
     configure(install.repositories.mavenInstaller) {
         pom.project pomConfig
     }
-    signing {
-        required { !isSnapshot }
-        sign configurations.archives
-    }
+    //signing {
+    //    required { !isSnapshot }
+    //    sign configurations.archives
+   // }
     uploadArchives {
         repositories {
             mavenDeployer {
@@ -82,8 +82,7 @@ subprojects {
     }
 
     repositories {
-        mavenCentral()
-        maven { url 'http://jpos.org/maven' }
+        maven { url library_url + '/' + resolve_repository }
         mavenLocal()
     }
 

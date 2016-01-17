@@ -13,6 +13,47 @@ project.ext {
             targetConfiguration.load(it);   
         }
     }
+
+    def pomConfig = {
+        name 'jPOS-EE Project'
+        description """
+    jPOS Extended Edition
+  """
+        url 'http://jpos.org'
+        inceptionYear '1998'
+        organization {
+            name 'jPOS.org'
+            url 'http://jpos.org'
+        }
+        issueManagement {
+            system 'YouTrack'
+            url 'https://jpos.org/issues'
+        }
+        scm {
+            url "http://github.com/jpos/jPOS"
+            connection "scm:git:https://github.com/jpos/jPOS-EE.git"
+            developerConnection "scm:git:git@github.com:jpos/jPOS-EE.git"
+        }
+        licenses {
+            license {
+                name 'GNU AFFERO GENERAL PUBLIC LICENSE'
+                url 'http://www.gnu.org/licenses/agpl-v3.html'
+                comments 'See http://jpos.org/license for more details.'
+                distribution 'repo'
+            }
+        }
+        developers {
+            developer {
+                id 'jpos-team'
+                name 'jPOS Development Team'
+                email 'info@jpos.org'
+            }
+        }
+    }
+
+configure(install.repositories.mavenInstaller) {
+   pom.project pomConfig
+}
 }
 
 // We build a CopySpec for consistency
